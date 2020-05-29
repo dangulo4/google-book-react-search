@@ -3,8 +3,7 @@ import BookCard from '../Components/BookCard';
 import SearchForm from '../Components/SeachForm';
 import Wrapper from '../Components/Wrapper';
 import Col from '../Components/Col';
-import API from './API';
-import './App.css';
+import API from '../utils/API';
 
 class Search extends React.Component {
   state = { books: [], search: '' };
@@ -18,6 +17,19 @@ class Search extends React.Component {
   refreshPage() {
     window.location.reload(false);
   }
+
+  handleBookSave = (id) => {
+    const book = this.state.books.find((book) => book.id === id);
+
+    API.saveBook({
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors,
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks.thumbnail,
+      link: book.volumeInfo.infoLink,
+      key: book.id,
+    }).then(() => this.getBooks());
+  };
 
   searchBooks = (query) => {
     API.search(query)
