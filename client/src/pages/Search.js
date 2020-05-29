@@ -56,6 +56,21 @@ class Search extends React.Component {
     console.log('Handle', this.state.search);
   };
 
+  getBooks = () => {
+    API.getBooks(this.state.search)
+      .then((res) =>
+        this.setState({
+          books: res.data,
+        })
+      )
+      .catch(() =>
+        this.setState({
+          books: [],
+          message: 'Not found',
+        })
+      );
+  };
+
   handleFormSubmit = (e) => {
     e.preventDefault();
     console.log('Button Clicked', this.state.search, e);
@@ -79,7 +94,7 @@ class Search extends React.Component {
 
           <div className="row">
             <Col size="md-12">
-              {[...this.state.books].map((item) => (
+              {this.state.books.map((item) => (
                 <BookCard
                   title={item.title}
                   authors={item.authors}
@@ -87,6 +102,14 @@ class Search extends React.Component {
                   image={item.image}
                   link={item.link}
                   key={item.key}
+                  button={() => (
+                    <button
+                      onClick={() => this.handleBookSave(item.id)}
+                      className="btn btn-outline-dark mr-3"
+                    >
+                      Save
+                    </button>
+                  )}
                 />
               ))}
             </Col>

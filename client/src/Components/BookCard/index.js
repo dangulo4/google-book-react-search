@@ -18,15 +18,13 @@ function BookCard(props) {
           <a href={props.link} className="btn btn-outline-dark mr-3">
             View
           </a>
-          Button=
-          {() => (
-            <button
-              onClick={() => this.handleBookSave(props.id)}
-              className="btn btn-primary ml-2"
-            >
-              Save
-            </button>
-          )}
+
+          <button
+            onClick={() => this.handleBookSave(props.id)}
+            className="btn btn-outline-dark mr-3"
+          >
+            Save
+          </button>
         </div>
       </div>
 
