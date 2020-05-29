@@ -5,7 +5,7 @@ const bookSchema = new Schema({
   title: { type: String },
   authors: { type: Array },
   description: { type: String },
-  image: { type: Blob },
+  image: { type: String },
   link: { type: String },
   date: { type: Date, default: Date.now },
 });
